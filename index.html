@@ -10,474 +10,481 @@
 
 <body class="stackedit">
   <div class="stackedit__html"><h2 id="milestone_five_monica_pagan">milestone_five_monica_pagan</h2>
-<p>For this tutorial, the datasets that will be worked with are crime (which can be found here <a href="https://www.opendataphilly.org/dataset/crime-incidents">https://www.opendataphilly.org/dataset/crime-incidents</a>), police stations (which can be found here <a href="https://www.opendataphilly.org/dataset/police-stations">https://www.opendataphilly.org/dataset/police-stations</a>) and police boundaries (which can be found here <a href="https://www.opendataphilly.org/dataset/police-districts">https://www.opendataphilly.org/dataset/police-districts</a>) datasets. All three datasets are from <a href="http://OpenDataPhilly.com">OpenDataPhilly.com</a> and were available for the public to view, access and download the data to use.</p>
-<p>These datasets can be brought to QGIS and found through the browser panel. You are then able to go through folders to whichever folder you have saved your data to. In this tutorial the data was saved in <strong>C:\ &gt; Users &gt; tuf91019 &gt; Spatial Database Design</strong>. These files can then be clicked on and off depending on if the user would like to view them or not. The crime file which once downloaded is called incidents_part1_part2 contains some of the following attributes:</p>
+<p>This tutorial will help you get started in creating your very own database. This database will focus primarily on crime within the city of Philadelphia Pennsylvania and will also utilize both police station data and police boundaries data from Philadelphia.</p>
+<p>For this tutorial, the data sets that will be worked with are crime (which can be found here <a href="https://www.opendataphilly.org/dataset/crime-incidents">https://www.opendataphilly.org/dataset/crime-incidents</a>), police stations (which can be found here <a href="https://www.opendataphilly.org/dataset/police-stations">https://www.opendataphilly.org/dataset/police-stations</a>) and police boundaries (which can be found here <a href="https://www.opendataphilly.org/dataset/police-districts">https://www.opendataphilly.org/dataset/police-districts</a>) data sets. All three data sets are from <a href="http://OpenDataPhilly.com">OpenDataPhilly.com</a> and were available for the public to view, access and download the data to use.</p>
+<p>These data sets can be brought to QGIS and found through the browser panel. You are then able to go to whichever folder you have saved your data to. In this tutorial the data was saved in <strong>C:\ &gt; Users &gt; tuf91019 &gt; Spatial Database Design</strong>. These files can then be clicked on and off depending on if the user would like to view them or not. The crime file which once downloaded is called incidents_part1_part2 contains some of the following attributes:</p>
 <ul>
-<li>point_y</li>
-<li>objectid</li>
-<li>dc_dist</li>
-<li>psa</li>
-<li>dispatch_d</li>
-<li>dispatch_1</li>
-<li>hour_</li>
-<li>location_b</li>
-<li>ucr_genera</li>
-<li>text_gener</li>
-<li>point_x</li>
-<li>dispatch_t</li>
+<li><strong>point_y</strong>- this refers to the point y data</li>
+<li><strong>objectid</strong>- objects numbers in the data set</li>
+<li><strong>dc_dist</strong>- describes the district boundary</li>
+<li><strong>psa</strong>- police service area boundary</li>
+<li><strong>dispatch_d</strong>- date that the officer was dispatched to the crime</li>
+<li><strong>dispatch_1</strong>- this is also a dispatch date</li>
+<li><strong>hour_</strong>- the generalized hour of the crime</li>
+<li><strong>location_b</strong>- the generalized location of the crime by block</li>
+<li><strong>ucr_genera</strong>- the rounded crime code for a particular crime</li>
+<li><strong>text_gener</strong>- the text of the crime that was committed</li>
+<li><strong>point_x</strong>- this refers to the point x data</li>
+<li><strong>dispatch_t</strong>- this refers to the dispatch time</li>
+<li><strong>DC_Key</strong>- the unique identifier of the crime which is made of the year, district, unique ID.</li>
 </ul>
-<p>The following dataset which is police_stations contains:</p>
+<p>The following data set which is police_stations contains:</p>
 <ul>
-<li>objectid</li>
-<li>district_n</li>
-<li>location</li>
-<li>telephone_</li>
-<li>ruleid</li>
+<li><strong>objectid</strong>- objects numbers in the data set</li>
+<li><strong>district_n</strong>- police district</li>
+<li><strong>location</strong>- the location of the police station</li>
+<li><strong>telephone_</strong>- the telephone number of the police station</li>
+<li><strong>ruleid</strong>- a representation rule to symbolize the features of the class</li>
 </ul>
 <p>The police_boundaries_district had the columns:</p>
 <ul>
-<li>gis_police</li>
-<li>perimeter</li>
-<li>district_</li>
-<li>district_i</li>
-<li>dist_num</li>
-<li>sum_area</li>
-<li>dist_numc</li>
-<li>location</li>
-<li>phone</li>
-<li>div_code</li>
-<li>area_sqmi</li>
-<li>shape_leng</li>
-<li>shape_area</li>
+<li><strong>gis_police</strong>- this had no information on the metadata and also appeared with zeros</li>
+<li><strong>perimeter</strong>- this gave the perimeter of each district</li>
+<li><strong>district_</strong>-  this gives the district numbers each police boundary</li>
+<li><strong>district_i</strong>- this gives the district numbers each police boundary</li>
+<li><strong>dist_num</strong>- this gives the district numbers each police boundary</li>
+<li><strong>sum_area</strong>- the area for each police boundary</li>
+<li><strong>dist_numc</strong>- this gives the district numbers each police boundary</li>
+<li><strong>location</strong>- this is the location for each police boundary</li>
+<li><strong>phone</strong>- phone number provided for the district</li>
+<li><strong>div_code</strong>- division code for the district</li>
+<li><strong>area_sqmi</strong>- area in square miles for each district</li>
+<li><strong>shape_leng</strong>- shape length for each district</li>
+<li><strong>shape_area</strong>- shape area for each district</li>
 </ul>
-<p>After viewing the information and its attributes an individual’s next step is to create a schema in a database management tool such as DBeaver. This lets you connect to PostgreSQL which is a free and open-source relational database system that lets you use SQL. This is where all of the information is stored and is able to connect a database. In this case, this database is called philadelphia and is connected to a previous port that was created earlier according to which port was available on this laptop. This database is created through the following code in DBeaver:</p>
+<p>After viewing the information and its attributes an individual’s next step is to create a schema in a database management tool such as DBeaver. This lets you connect to PostgreSQL which is a free and open-source relational database system that lets you connect and create servers. This is where all of the information will be stored. In this case, this database is called <strong>philadelphia</strong> and is connected to a port that was available on this computer. This will be explained further below. This database is created through the following code in DBeaver:</p>
 <pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">drop</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> philadelphia<span class="token punctuation">;</span>
-
 <span class="token keyword">create</span> <span class="token keyword">database</span> philadelphia<span class="token punctuation">;</span>
 </code></pre>
-<p>The next step was to create a schema within the database called <strong>philadelphia</strong>. This was done by right clicking on the database and selecting Create &gt; Schema. The schema name is then set to philadelphia. This is where the information will be stored from QGIS. Then make sure to run the following code in DBeaver:</p>
+<p>The next step was to create a schema within the database called <strong>philadelphia</strong>. This was done by right clicking on the database and selecting Create &gt; Schema. The schema name is then named <strong>philadelphia</strong>. This is where the information will be stored from QGIS. Afterwards make sure to run the following code in DBeaver:</p>
 <pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">create</span> extension postgis<span class="token punctuation">;</span>
 </code></pre>
-<p>This extension will help the geometries to come over properly from application QGIS. When in QGIS, an individual can move these shapefiles over to PostgreSQL. This can be done through the Database tab at the top right. An individual would then click on DB Manager and connect to the database that they would have created for this particular project. For this particular project it would be the philadelphia database. After connecting to the service you have, in this case it being PostgreSQL, which is able to support these geographic objects into the database, you can connect and begin to move the shapefiles over. Sometimes connecting to a database may require having a username and password so it may be good to have these pulled up somewhere.</p>
-<p>After connecting to the philadelphia, it is important to select the philadelphia schema, and from here click on the import button. Here it gives you the option to import the vector layer and input any of the layers that you currently have listed in your map both seen and unseen. From here you are to select as an input the incidents_part1_part2. For the schema, philadelphia should be selected and for table, as seen in the image below. Make sure to copy over incidents_part1_part2. The next thing should be to then check off the box for both a “geometry column” as well as “convert field names to lowercase”. Click okay and wait for about 10 to 20 minutes as this file is large and should take a while to load into your database. Afterwards, bring the data over for police stations making sure to name it philadelphia_stations. Repeat the same process for Philadelphia police boundaries making sure to name it philadelphia_police_bound. Please check off the boxes a “geometry column” and “convert field names to lowercase” for both of these files as well. After waiting a few minutes to make sure that each has been processed, open up DBeaver and check to make sure that the data has been successfully brought over to your database in each table. You may need to right click on the database and hit refresh. You should then see it appear. For the crime data there should be 2,664,247. This can all be checked by running the following code:</p>
+<p>This extension will help the geometries to come over properly from the application QGIS. When in QGIS, an individual can move these shapefiles over to PostgreSQL. This can be done through the Database tab at the top right.</p>
+<p>An individual will then click on DB Manager and connect to the database that they have created for this particular project. They then need to connect to the service that they have, which in this case is PostgreSQL. PostgreSQL can support these geographic objects as they are moved into the database. Sometimes connecting to a database may require having a username and password so it is important to have these pulled up somewhere.  After entering in this information, you need to select the <strong>philadelphia</strong> database. You can then connect and begin to move the shapefiles over.</p>
+<p>After connecting to the <strong>philadelphia database</strong>, it is important to select the <strong>philadelphia schema</strong>, and from here click on the import button. Here it gives you the option to import the vector layer and input any of the layers that you currently have listed in your map both seen and unseen. From here you will select the layer incidents_part1_part2. For the schema, <strong>philadelphia</strong> should be selected and for table, as seen in the image below. Make sure to copy over incidents_part1_part2. Next you should check off the box for both a “geometry column” as well as “convert field names to lowercase”.  Make sure to name this table “incident_part1_part2”. Click okay and wait for about 10 to 20 minutes, as this file is large and should take a while to load into your database. Afterwards, bring the data over for police stations, and name this table “police_tp” making sure to put the table name in lower case. Repeat the same process for Philadelphia police boundaries naming this table “phillypolice_boundaries_district”. Check off the boxes “geometry column” and “convert field names to lowercase” for both of these files as well. After waiting a few minutes to make sure that each has been processed, open up DBeaver and check to ensure that the data has been successfully brought over to your database in each table. You may need to right click on the database and hit refresh. It should then appear. For the crime data there should be 2,664,247. The pictures of this process can be viewed below. After completing this process, this can all be checked by running the following code:</p>
 <pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">select</span> <span class="token operator">*</span>
-<span class="token keyword">from</span> philadelphia_police_boundaries<span class="token punctuation">;</span>
+<span class="token keyword">from</span> phillypolice_boundaries_district<span class="token punctuation">;</span>
 
 <span class="token keyword">select</span> <span class="token operator">*</span>
-<span class="token keyword">from</span> police_station<span class="token punctuation">;</span>
+<span class="token keyword">from</span> police_tp<span class="token punctuation">;</span>
 
 <span class="token keyword">select</span> <span class="token operator">*</span>
-<span class="token keyword">from</span> crime_incidents
+<span class="token keyword">from</span> incidents_part1_part2
 
 <span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
-<span class="token keyword">from</span> crime_incidents<span class="token punctuation">;</span>
+<span class="token keyword">from</span> incidents_part1_part2<span class="token punctuation">;</span>
 </code></pre>
-<p>After making sure that each of the datasets are present and accounted for, questions can be asked by the user and answered by the data. Some of the questions that can be analyzed with this data are, at what time the most dispatch times being sent out for thefts, at what dispatch time are the least amount of crimes being committed not including the airport, and for a spatial question which station has the most burglaries being committed within a 0.5 mile radius of a police station?</p>
-<p>The philadelphia_police_bound data has integer, varchar, and geom data. This data had excess information such as x and y data as well as the area_sqmi, dist_numc, sum_area, dist_num, dist_i, perimeter, and area. Many of these were repetitions of the column district_ and the perimeter, area_sqmi, sum_area and area could be calculated in the geom. These columns were eliminated through the creation of a new table called philadelphia_police_boundaries. This was created through a create table statement and then through the exchange transform load process, or ETL process. These excess columns were then eliminated and only the core columns were kept. This can be seen in the following code:</p>
-<pre class=" language-sql"><code class="prism  language-sql">
-<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> philadelphia_police_districts <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
-
-<span class="token keyword">create</span> <span class="token keyword">table</span> philadelphia_police_districts <span class="token punctuation">(</span>
-
+<p><img src="https://github.com/monica-pagan/images/blob/gh-pages/philadelphia%20connected.png?raw=true" alt="enter image description here"></p>
+<p><img src="https://github.com/monica-pagan/images/blob/gh-pages/importing%20layers.png?raw=true" alt="enter image description here"></p>
+<p><img src="https://github.com/monica-pagan/images/blob/gh-pages/saving%20imported%20data.png?raw=true" alt="enter image description here"></p>
+<p><img src="https://github.com/monica-pagan/images/blob/gh-pages/imported%20data%20successful.png?raw=true" alt="enter image description here"></p>
+<p>The phillypolice_boundaries_district data has integer, varchar, and geom data. This data had excess information such as x and y data as well as the area_sqmi, dist_numc, sum_area, dist_num, dist_i, perimeter, and area. Many of these were repetitions of the column district_ and the perimeter, area_sqmi, sum_area and area could be calculated in the geom. These columns were eliminated through the creation of a new table called philadelphia_police_boundaries. This was created through a create table statement and then through the exchange transform load process, or ETL process. These excess columns were then eliminated and only the core columns were kept. This can be seen in the following code:</p>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> philadelphia_police_boundaries <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> philadelphia_police_boundaries <span class="token punctuation">(</span>
 police_dist_id <span class="token keyword">int</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
-
 district <span class="token keyword">int</span><span class="token punctuation">,</span>
-
 location <span class="token keyword">varchar</span><span class="token punctuation">,</span>
-
 geom <span class="token keyword">geometry</span><span class="token punctuation">,</span>
-
 phone <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+div_code <span class="token keyword">varchar</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-div_code <span class="token keyword">varchar</span>
-
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">insert</span>  <span class="token keyword">into</span> philadelphia_police_districts
-
+<span class="token keyword">insert</span>  <span class="token keyword">into</span> philadelphia_police_boundaries
 <span class="token punctuation">(</span>police_dist_id<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> district<span class="token punctuation">,</span> location<span class="token punctuation">,</span> phone<span class="token punctuation">,</span> div_code<span class="token punctuation">)</span>
-
 <span class="token keyword">select</span>
-
 id :: <span class="token keyword">int</span><span class="token punctuation">,</span>
-
 geom :: <span class="token keyword">geometry</span><span class="token punctuation">,</span>
-
 district_ :: <span class="token keyword">int</span><span class="token punctuation">,</span>
-
 location :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
-
 phone :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
-
 div_code :: <span class="token keyword">varchar</span>
-
 <span class="token keyword">from</span>
-
 phillypolice_boundaries_district<span class="token punctuation">;</span>
-
 </code></pre>
-<p>Much of the incidents_part1_part2 data had integers, geom, date, and varchar data. This dataset also held a lot of excess information such as repetitive times and dates, as well as excess x and y data. When creating the new table crime_incidents which gets all of the data through the exchange transform load process, or ETL process, this excess information was left out to create a simpler table. There also needed to be updates on the districts because previous districts had been added together. These old districts that were updated were preserved through a separate table that was created called “crime_districts”. A ucr_text_genera table was also created in order to show the type of crimes that were being committed along with the code for each crime. These tables were created through the following:</p>
-<pre class=" language-sql"><code class="prism  language-sql">
-<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> crime_incident <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
-
+<p><em><strong>Many</strong></em> of the incidents_part1_part2 data had integers, geom, date, and varchar data. This data set also held a lot of excess information such as repetitive times and dates, as well as excess x and y data. When creating the new table crime_incidents which gets all of the data from the incidents_part1_part2 through the exchange transform load process, or ETL process, this excess information was left out to create a simpler table. There also needed to be updates on the districts because previous districts had been added together. These old districts that were updated were preserved through a separate table that was created called “crime_districts”. A ucr_text_genera table was also created in order to show the type of crimes that were being committed along with the code for each crime. These tables were created through the following:</p>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> crime_incident <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
 <span class="token keyword">create</span>  <span class="token keyword">table</span> crime_incident <span class="token punctuation">(</span>
+dc_key <span class="token keyword">varchar</span>  <span class="token keyword">primary</span>  <span class="token keyword">key</span><span class="token punctuation">,</span>
+police_dist_id <span class="token keyword">int</span> <span class="token keyword">references</span> philadelphia_police_boundaries<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+crime_id <span class="token keyword">integer</span><span class="token punctuation">,</span>
+crime_dist <span class="token keyword">integer</span><span class="token punctuation">,</span>
+psa <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+crime_location <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+dispatch_date <span class="token keyword">date</span><span class="token punctuation">,</span>
+dispatch_time <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+geom <span class="token keyword">geometry</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-dc_key <span class="token keyword">varchar</span>  <span class="token keyword">primary</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">key</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-police_dist_id <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">references</span><span class="token operator">*</span><span class="token operator">*</span> philadelphia_police_districts<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-
-crime_id <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">integer</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-crime_dist <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">integer</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-psa <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-crime_location <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dispatch_date <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">date</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dispatch_time <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-geom <span class="token keyword">geometry</span>
-
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">insert</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">into</span><span class="token operator">*</span><span class="token operator">*</span> crime_incident
-
+<span class="token keyword">insert</span> <span class="token keyword">into</span> crime_incident
 <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">,</span> crime_id<span class="token punctuation">,</span> crime_dist<span class="token punctuation">,</span> psa<span class="token punctuation">,</span> crime_location<span class="token punctuation">,</span> dispatch_date<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> geom<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span>
-
-dc_key :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-<span class="token punctuation">(</span><span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span> police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span> philadelphia_police_districts <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">where</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_dist :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-
-id :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">integer</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dc_dist :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">integer</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-psa :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-location_b :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dispatch_d :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">date</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dispatch_t :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> police_dist_id
+<span class="token keyword">from</span> philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">where</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_dist :: <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+id :: <span class="token keyword">integer</span><span class="token punctuation">,</span>
+dc_dist :: <span class="token keyword">integer</span><span class="token punctuation">,</span>
+psa :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+location_b :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+dispatch_d :: <span class="token keyword">date</span><span class="token punctuation">,</span>
+dispatch_t :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
 geom :: <span class="token keyword">geometry</span>
+<span class="token keyword">from</span>
+incidents_part1_part2 <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
 
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span>
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'16'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'92'</span><span class="token punctuation">;</span>
 
-incidents_part1_part2 <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span><span class="token punctuation">;</span>
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'3'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'4'</span><span class="token punctuation">;</span>
 
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">UPDATE</span><span class="token operator">*</span><span class="token operator">*</span> crime_incident
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'22'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'23'</span><span class="token punctuation">;</span>
 
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">SET</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'16'</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">WHERE</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'92'</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">UPDATE</span><span class="token operator">*</span><span class="token operator">*</span> crime_incident
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">SET</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'3'</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">WHERE</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'4'</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">UPDATE</span><span class="token operator">*</span><span class="token operator">*</span> crime_incident
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">SET</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'22'</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">WHERE</span><span class="token operator">*</span><span class="token operator">*</span> crime_dist <span class="token operator">=</span> <span class="token string">'23'</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">insert</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">into</span><span class="token operator">*</span><span class="token operator">*</span> crime_districts
-
+<span class="token keyword">insert</span> <span class="token keyword">into</span> crime_districts
 <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> crime_district<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">bigint</span><span class="token punctuation">,</span>
+dc_dist :: <span class="token keyword">int</span>
+<span class="token keyword">from</span>
+incidents_part1_part2 <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
 
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span>
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> ucr_text_genera <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> ucr_text_genera <span class="token punctuation">(</span>
+dc_key <span class="token keyword">varchar</span> <span class="token keyword">references</span> crime_incident<span class="token punctuation">(</span>dc_key<span class="token punctuation">)</span><span class="token punctuation">,</span>
+ucr_id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+ucr_genera <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+text_gener <span class="token keyword">varchar</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-dc_key :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">bigint</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-dc_dist :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span>
-
-incidents_part1_part2 <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">DROP</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">TABLE</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">IF</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">EXISTS</span><span class="token operator">*</span><span class="token operator">*</span> ucr_text_genera <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">CASCADE</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">create</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">table</span><span class="token operator">*</span><span class="token operator">*</span> ucr_text_genera <span class="token punctuation">(</span>
-
-dc_key <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">references</span><span class="token operator">*</span><span class="token operator">*</span> crime_incident<span class="token punctuation">(</span>dc_key<span class="token punctuation">)</span><span class="token punctuation">,</span>
-
-ucr_id <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">serial</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">primary</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">key</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-ucr_genera <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-text_gener <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">insert</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">into</span><span class="token operator">*</span><span class="token operator">*</span> ucr_text_genera
-
+<span class="token keyword">insert</span> <span class="token keyword">into</span> ucr_text_genera
 <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> ucr_genera<span class="token punctuation">,</span> text_gener<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span>
-
-dc_key :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">bigint</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-ucr_genera :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-text_gener :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span>
-
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">bigint</span><span class="token punctuation">,</span>
+ucr_genera :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+text_gener :: <span class="token keyword">varchar</span>
+<span class="token keyword">from</span>
 incidents_part1_part2<span class="token punctuation">;</span>
 </code></pre>
-<p>Within the philadelphia_station data there was also integers, geom, and varchar data. There was excess information that needed to be condensed such as rule_id, x_coordina and y_coordina. These columns were excluded when the table police_station was created. This can be created through the same code that is listed at the bottom but substituted for police_station instead. Within the police data there was also excess information. This was also condensed through the ETL process having only the columns that were needed and leaving out the columns that were unnecessary. The philadelphia_station data also needed to be updated because there was a station 77 that was not listed before. This was updated through the code:</p>
+<p>Within the police_tp data there was also integers, geom, and varchar data. Information that needed to be condensed included rule_id, x_coordina and y_coordina. These columns were excluded when the table police_station was created. This can be created through the same code that is listed at the bottom but substituted for police_station instead. Within the police data there was also excess information. This was also condensed through the ETL process having only the columns that were needed and leaving out the columns that were unnecessary. The philadelphia_station data also needed to be updated because there was a station 77 that was not listed before. This information needed to be put in by hand. This was updated through following the code:</p>
 <pre class=" language-sql"><code class="prism  language-sql">
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">DROP</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">TABLE</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">IF</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">EXISTS</span><span class="token operator">*</span><span class="token operator">*</span> police_station <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">CASCADE</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">create</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">table</span><span class="token operator">*</span><span class="token operator">*</span> police_station <span class="token punctuation">(</span>
-
-district_neighborhoods <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-police_dist_id <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">references</span><span class="token operator">*</span><span class="token operator">*</span> philadelphia_police_districts<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-
-station_id <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">integer</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">primary</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">key</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> police_station <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> police_station <span class="token punctuation">(</span>
+district_neighborhoods <span class="token keyword">int</span><span class="token punctuation">,</span>
+police_dist_id <span class="token keyword">int</span> <span class="token keyword">references</span> philadelphia_police_boundaries<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+station_id <span class="token keyword">integer</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
 geom <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+locationvarchar<span class="token punctuation">,</span>
+telephone <span class="token keyword">varchar</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token operator">*</span><span class="token operator">*</span>location<span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> police_station
+<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> location<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+<span class="token string">'77'</span><span class="token punctuation">,</span> <span class="token string">'MULTIPOINT ((-75.13396 40.00764))'</span><span class="token punctuation">,</span> <span class="token string">'25'</span><span class="token punctuation">,</span> <span class="token string">'Departures Rd'</span><span class="token punctuation">,</span> <span class="token string">'937-6918'</span><span class="token punctuation">,</span> <span class="token string">'15'</span><span class="token punctuation">;</span>
 
-telephone <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">insert</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">into</span><span class="token operator">*</span><span class="token operator">*</span> police_station
-
-<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token operator">*</span>location<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span>
-
-district_n :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
+<span class="token keyword">insert</span> <span class="token keyword">into</span> police_station
+<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> location<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+district_n :: <span class="token keyword">int</span><span class="token punctuation">,</span>
 geom :: <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+objectid :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+location :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+telephone_ :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> police_dist_id
+<span class="token keyword">from</span> philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">where</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>district_n<span class="token punctuation">)</span>
+<span class="token keyword">from</span>
+police_tp <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
 
-objectid :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-<span class="token operator">*</span><span class="token operator">*</span>location<span class="token operator">*</span><span class="token operator">*</span> :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-telephone_ :: <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">varchar</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span>
-
-<span class="token punctuation">(</span><span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span> police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span> philadelphia_police_districts <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">where</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>district_n<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span>
-
-police_tp <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span><span class="token punctuation">;</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">insert</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">into</span><span class="token operator">*</span><span class="token operator">*</span> police_station
-
-<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token operator">*</span>location<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span> telephone<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token string">'77'</span><span class="token punctuation">,</span> <span class="token string">'MULTIPOINT ((-75.13396 40.00764))'</span><span class="token punctuation">,</span> <span class="token string">'25'</span><span class="token punctuation">,</span> <span class="token string">'Departures Rd'</span><span class="token punctuation">,</span> <span class="token string">'937-6918'</span><span class="token punctuation">;</span>
-
-
+<span class="token keyword">insert</span> <span class="token keyword">into</span> police_station
+<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> location<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+district_n :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+geom :: <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+objectid :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+location :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+telephone_ :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> police_dist_id
+<span class="token keyword">from</span> philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">where</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>district_n<span class="token punctuation">)</span>
+<span class="token keyword">from</span> police_tp <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
 </code></pre>
-<p>Before creating the indexes, I noted that when running my queries for the crime_incidents table they were taking much longer to pull up for information on the columns  dc_key, crime_id, crime_location, dispatch_date, and dispatch_time. This is because there are over two million rows of information. When querying with these columns it also often took longer than expected. In order to solve this problem I have created an index for crime_incidents as well as the ucr_text_genera column because both of these tables faced the same problems. After creating the indexes there was a decrease in the time of looking up the information for any of the crime_incidents table as well as the ucr_text_genera table. This would also help diminish the times of the query. This code can be found below:</p>
-<pre><code>**CREATE**  **INDEX** crime_incidents
-**ON** crime_incident (dc_key, crime_id, crime_location, dispatch_date, dispatch_time);
-</code></pre>
-<pre><code>**CREATE**  **INDEX** crime_types
-**ON** ucr_text_genera (ucr_genera, text_gener);
-</code></pre>
-<p>Now that we have all of our information we are able to move forward and ask spatial questions. We can construct code and use functions to get the answers we need to the following three questions:</p>
+<p>An Entity Relationship Diagram or ERD was created for these tables showing that there is a relationship between these tables. This diagram shows a one to many relationship or a one to one relationship through lines and crows feet. This is visible on the following diagram:</p>
+<p><img src="https://github.com/monica-pagan/images/blob/gh-pages/philadelphia_ERD.png?raw=true" alt="enter image description here"></p>
+<p>After ensuring that each of the data sets are present and accounted for, questions can then be asked by the user and answered by the data. A spatial questions that can be analyzed with this data is does police station 12 have robberies being committed? We can also ask analytical questions. Let’s construct code and use functions to get the for the following three questions:</p>
 <ol>
-<li>What police stations have crimes being committed close to police stations for the top 10?<br>
-<em>This questions analyzes which police stations have crimes being committed close by with the text for each crime available. This will use the columns district_neighborhoods in the police_station table as well as the text gener column in the crime_incidents table and geom column. As these columns are in separate tables and we need this information, however, there must be two joins on three tables. There must also be the limit clause to help limit how many results will be coming back when the answers are returned.</em></li>
+<li>Which crime location has the most thefts and at what time?<br>
+<em>This questions analyzes which police stations sends out the most dispatches for the total number of thefts being committed at a particular location. This utilizes both the ucr_text_genera table as well as the crime_incidents table. In order for this question to be answered fully, a join must be completed on two tables in order for the crime_location data to be available as well as the text_gener data. A where statement is added in order for the text_gener to include only thefts. A group by statement is also included as well as an order by descending and a limit clause to help limit how many results will be coming back.</em></li>
 </ol>
-<pre class=" language-sql"><code class="prism  language-sql">
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">select</span><span class="token operator">*</span><span class="token operator">*</span> district_neighborhoods<span class="token punctuation">,</span> text_gener<span class="token punctuation">,</span> ST_Distance<span class="token punctuation">(</span><span class="token number">c</span><span class="token punctuation">.</span>geom<span class="token punctuation">,</span> <span class="token number">e</span><span class="token punctuation">.</span>geom<span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span> police_station <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">join</span><span class="token operator">*</span><span class="token operator">*</span>
-
-philadelphia_police_boundaries <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">on</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span><span class="token punctuation">.</span>police_dist_id <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">join</span><span class="token operator">*</span><span class="token operator">*</span>
-
-crime_incidents <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">e</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">on</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span><span class="token punctuation">.</span>police_dist_id <span class="token operator">=</span> <span class="token number">e</span><span class="token punctuation">.</span>police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">order</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">by</span><span class="token operator">*</span><span class="token operator">*</span> ST_Distance
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">limit</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token number">10</span><span class="token punctuation">;</span>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span>crime_location<span class="token punctuation">)</span><span class="token punctuation">,</span> crime_location<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> text_gener
+<span class="token keyword">from</span> crime_incident <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">join</span>
+ucr_text_genera <span class="token keyword">as</span> <span class="token number">d</span>
+<span class="token keyword">on</span> <span class="token number">c</span><span class="token punctuation">.</span>dc_key <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_key
+<span class="token keyword">where</span> text_gener <span class="token operator">like</span> <span class="token string">'Thefts%'</span>
+<span class="token keyword">group</span> <span class="token keyword">by</span> crime_location<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> text_gener
+<span class="token keyword">order</span> <span class="token keyword">by</span> count <span class="token keyword">desc</span>
+<span class="token keyword">limit</span> <span class="token number">1</span><span class="token punctuation">;</span>
 </code></pre>
-<ol>
-<li>Does district 14 contain any robberies?<br>
-<em>This question examines if there are any robberies being committed within a single district. This requires for there to be two joins on three tables because you need the geometries of the police_station table. This requires for the first join to be on police districts through the police_dist_id and for the second join to be on the dc_key through the crime_incidents. The query also requires a where clause that uses a like statement for robberies as well as for police districts. Because the police district id is an integer there are no quotations around 14. The group by statement is grouped by the police districts, ST_DWithin, and the text generator.</em></li>
+<p>Results</p>
+<pre><code>count|crime_location      |dispatch_time|text_gener|
+-----|--------------------|-------------|----------|
+   18|1000 BLOCK MARKET ST|13:38:00     |Thefts    |
+</code></pre>
+<ol start="2">
+<li>Information for two of the police stations is hard to find. You need to find the division codes but all you have is the phone number ‘686-3050’ from the philadelphia_police_boundaries and the police district id 15. Find out the division codes of these police districts as well as their station id. This will require a join.<br>
+<em>This question is trying to find the division code of each of these stations as well as the station id with the limited amount of information that is given to the user.  This requires for there to be one join on both the police_station table as well as the philadelphia_police_boundaries table. This is needed because the columns div_code and phone are from the philadelphia_police_boundaries table while the station_id column is from the police_station table. A where statement is used for the police_dist_id as well as for the phone number. An OR operator is used here so that the query can return both results. This gives us the result we are looking for.</em></li>
 </ol>
-<pre><code>select district_neighborhoods, text_gener, ST_Within(c.geom, d.geom)
+<pre><code>select div_code, phone, station_id
 from police_station as c
 join
-crime_incident d
-on (c.police_dist_id = d.police_dist_id)
-join
-ucr_text_genera as e
-on (d.dc_key = e.dc_key)
-where (text_gener like 'Robbery%') and (district_neighborhoods = 14)
-group by district_neighborhoods, ST_Within, text_gener;
+philadelphia_police_boundaries as d
+on c.police_dist_id = d.police_dist_id
+where (c.police_dist_id = 15) OR (phone = '686-3050');
 </code></pre>
-<ol>
-<li>Which station has the most burglaries being committed within a 0.5 mile radius of a police station?<br>
-<em>This question is analyzing burglaries being committed within a 0.5 mile radius of a police station in Philadelphia. This uses a ST_Buffer function, a count in the select statement which will help show how many were dispatches were sent out at that time, a group by clause. A join was also used in order for the text_gener to be brought over as well from the table ucr_text_genera. A where clause helped narrow down the search to Burglary which was possible because of the text_gener column. The where clause also used a like statement in case the Burglary. This will also contain an order by statement as well as a limit of one in the query. The buffer was also set around the geom of the police station and set for 0.5 miles. This was also possible because the SRID was set to Pennsylvania South and converted to feet. This helped make the process of calculating the buffer a little</em></li>
+<p>Results</p>
+<pre><code>div_code|phone   |station_id|
+--------|--------|----------|
+SWPD    |937-6816|        25|
+NWPD    |686-3050|         7|
+</code></pre>
+<ol start="3">
+<li>Which police station id responded to the most arsons?Make sure to also show the police district.<br>
+<em>This question is analyzing which station id were dispatched to arsons in Philadelphia. This question is asking for the total number of arsons so it will be need a count function. Because of the nature of the question it will be using three joins on four tables. The police_station table is focused on the police stations and contains the station_id column which is necessary for this question. In order to get to this table, however, it is important to get to the philadelphia_police_boundaries table. This will be accessible through the crime_incidents table which will give us the information leading to the ucr_text_genera table. From here we will be able to hone in on the arsons and use a where clause as well as a group by. An order by count desc will help query return the highest number of arsons in the police district we are looking for.</em></li>
 </ol>
-<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">select</span>  <span class="token function">count</span><span class="token punctuation">(</span>dispatch_time<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">e</span><span class="token punctuation">.</span>police_dist_id<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> text_gener<span class="token punctuation">,</span> ST_Buffer<span class="token punctuation">(</span><span class="token operator">*</span><span class="token operator">*</span>ST_Transform<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">e</span><span class="token punctuation">.</span>geom<span class="token punctuation">,</span> <span class="token number">2272</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2640</span><span class="token punctuation">)</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">from</span><span class="token operator">*</span><span class="token operator">*</span>
-
-police_station <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">e</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">join</span><span class="token operator">*</span><span class="token operator">*</span>
-
-crime_incident <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">on</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token number">e</span><span class="token punctuation">.</span>police_dist_id <span class="token operator">=</span> <span class="token number">c</span><span class="token punctuation">.</span>police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">join</span><span class="token operator">*</span><span class="token operator">*</span>
-
-ucr_text_genera <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">as</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">d</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">on</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token number">c</span><span class="token punctuation">.</span>dc_key <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_key
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">where</span><span class="token operator">*</span><span class="token operator">*</span> text_gener <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">like</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token string">'Burglary%'</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">group</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">by</span><span class="token operator">*</span><span class="token operator">*</span> dispatch_time<span class="token punctuation">,</span> text_gener<span class="token punctuation">,</span> <span class="token number">e</span><span class="token punctuation">.</span>geom<span class="token punctuation">,</span> <span class="token number">e</span><span class="token punctuation">.</span>police_dist_id
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">order</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">by</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span>count<span class="token operator">*</span><span class="token operator">*</span>  <span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">desc</span><span class="token operator">*</span><span class="token operator">*</span>
-
-<span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">limit</span><span class="token operator">*</span><span class="token operator">*</span>  <span class="token number">1</span><span class="token punctuation">;</span>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span>text_gener<span class="token punctuation">)</span><span class="token punctuation">,</span> text_gener<span class="token punctuation">,</span> <span class="token number">f</span><span class="token punctuation">.</span>police_dist_id<span class="token punctuation">,</span> station_id
+<span class="token keyword">from</span> ucr_text_genera <span class="token keyword">as</span> <span class="token number">c</span> 
+<span class="token keyword">join</span>
+crime_incident <span class="token keyword">as</span> <span class="token number">d</span>
+<span class="token keyword">on</span>  
+<span class="token number">c</span><span class="token punctuation">.</span>dc_key <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_key
+<span class="token keyword">join</span>
+philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">e</span>
+<span class="token keyword">on</span>
+<span class="token number">e</span><span class="token punctuation">.</span>police_dist_id <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>police_dist_id
+<span class="token keyword">join</span>
+police_station <span class="token keyword">as</span> <span class="token number">f</span>
+<span class="token keyword">on</span> <span class="token number">e</span><span class="token punctuation">.</span>police_dist_id <span class="token operator">=</span> <span class="token number">f</span><span class="token punctuation">.</span>police_dist_id
+<span class="token keyword">where</span> text_gener <span class="token operator">like</span> <span class="token string">'Arson'</span>
+<span class="token keyword">group</span> <span class="token keyword">by</span> text_gener<span class="token punctuation">,</span> <span class="token number">f</span><span class="token punctuation">.</span>police_dist_id<span class="token punctuation">,</span> station_id
+<span class="token keyword">order</span> <span class="token keyword">by</span> count <span class="token keyword">desc</span>
+<span class="token keyword">limit</span> <span class="token number">1</span><span class="token punctuation">;</span>
 </code></pre>
-<h1 id="files">Files</h1>
-<p>StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible <strong>offline!</strong></p>
-<h2 id="create-files-and-folders">Create files and folders</h2>
-<p>The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the <strong>New file</strong> button in the file explorer. You can also create folders by clicking the <strong>New folder</strong> button.</p>
-<h2 id="switch-to-another-file">Switch to another file</h2>
-<p>All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.</p>
-<h2 id="rename-a-file">Rename a file</h2>
-<p>You can rename the current file by clicking the file name in the navigation bar or by clicking the <strong>Rename</strong> button in the file explorer.</p>
-<h2 id="delete-a-file">Delete a file</h2>
-<p>You can delete the current file by clicking the <strong>Remove</strong> button in the file explorer. The file will be moved into the <strong>Trash</strong> folder and automatically deleted after 7 days of inactivity.</p>
-<h2 id="export-a-file">Export a file</h2>
-<p>You can export the current file by clicking <strong>Export to disk</strong> in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.</p>
-<h1 id="synchronization">Synchronization</h1>
-<p>Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your <strong>Google Drive</strong>, your <strong>Dropbox</strong> and your <strong>GitHub</strong> accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow… The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.</p>
-<p>There are two types of synchronization and they can complement each other:</p>
-<ul>
-<li>
-<p>The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.</p>
-<blockquote>
-<p>To start syncing your workspace, just sign in with Google in the menu.</p>
-</blockquote>
-</li>
-<li>
-<p>The file synchronization will keep one file of the workspace synced with one or multiple files in <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong>.</p>
-<blockquote>
-<p>Before starting to sync files, you must link an account in the <strong>Synchronize</strong> sub-menu.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="open-a-file">Open a file</h2>
-<p>You can open a file from <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong> by opening the <strong>Synchronize</strong> sub-menu and clicking <strong>Open from</strong>. Once opened in the workspace, any modification in the file will be automatically synced.</p>
-<h2 id="save-a-file">Save a file</h2>
-<p>You can save any file of the workspace to <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong> by opening the <strong>Synchronize</strong> sub-menu and clicking <strong>Save on</strong>. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.</p>
-<h2 id="synchronize-a-file">Synchronize a file</h2>
-<p>Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.</p>
-<p>If you just have modified your file and you want to force syncing, click the <strong>Synchronize now</strong> button in the navigation bar.</p>
-<blockquote>
-<p><strong>Note:</strong> The <strong>Synchronize now</strong> button is disabled if you have no file to synchronize.</p>
-</blockquote>
-<h2 id="manage-file-synchronization">Manage file synchronization</h2>
-<p>Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking <strong>File synchronization</strong> in the <strong>Synchronize</strong> sub-menu. This allows you to list and remove synchronized locations that are linked to your file.</p>
-<h1 id="publication">Publication</h1>
-<p>Publishing in StackEdit makes it simple for you to publish online your files. Once you’re happy with a file, you can publish it to different hosting platforms like <strong>Blogger</strong>, <strong>Dropbox</strong>, <strong>Gist</strong>, <strong>GitHub</strong>, <strong>Google Drive</strong>, <strong>WordPress</strong> and <strong>Zendesk</strong>. With <a href="http://handlebarsjs.com/">Handlebars templates</a>, you have full control over what you export.</p>
-<blockquote>
-<p>Before starting to publish, you must link an account in the <strong>Publish</strong> sub-menu.</p>
-</blockquote>
-<h2 id="publish-a-file">Publish a File</h2>
-<p>You can publish your file by opening the <strong>Publish</strong> sub-menu and by clicking <strong>Publish to</strong>. For some locations, you can choose between the following formats:</p>
-<ul>
-<li>Markdown: publish the Markdown text on a website that can interpret it (<strong>GitHub</strong> for instance),</li>
-<li>HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).</li>
-</ul>
-<h2 id="update-a-publication">Update a publication</h2>
-<p>After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the <strong>Publish now</strong> button in the navigation bar.</p>
-<blockquote>
-<p><strong>Note:</strong> The <strong>Publish now</strong> button is disabled if your file has not been published yet.</p>
-</blockquote>
-<h2 id="manage-file-publication">Manage file publication</h2>
-<p>Since one file can be published to multiple locations, you can list and manage publish locations by clicking <strong>File publication</strong> in the <strong>Publish</strong> sub-menu. This allows you to list and remove publication locations that are linked to your file.</p>
-<h1 id="markdown-extensions">Markdown extensions</h1>
-<p>StackEdit extends the standard Markdown syntax by adding extra <strong>Markdown extensions</strong>, providing you with some nice features.</p>
-<blockquote>
-<p><strong>ProTip:</strong> You can disable any <strong>Markdown extension</strong> in the <strong>File properties</strong> dialog.</p>
-</blockquote>
-<h2 id="smartypants">SmartyPants</h2>
-<p>SmartyPants converts ASCII punctuation characters into “smart” typographic punctuation HTML entities. For example:</p>
+<p>Results</p>
+<pre><code>count|text_gener|police_dist_id|station_id|
+-----|----------|--------------|----------|
+  685|Arson     |            12|         9|
+</code></pre>
+<p>Before creating the indexes, queries for the crime_incidents table were taking much longer to pull up for information on the columns dc_key, crime_id, crime_location, dispatch_date, and dispatch_time. This is because there are over two million rows of information.  In order to solve this problem I created an index for crime_incidents as well as the ucr_text_genera column because both of these tables encountered the same problems. After creating the indexes there was a decrease in the time of looking up the information of the crime_incidents table as well as the ucr_text_genera table. This helps speed up times for select statements as well as where clauses. This code can be found below:</p>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> crime_philadelphia
+<span class="token keyword">ON</span> crime_incident <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> crime_id<span class="token punctuation">,</span> crime_location<span class="token punctuation">,</span> dispatch_date<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> crime_location<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> crime_types
+<span class="token keyword">ON</span> ucr_text_genera <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> ucr_genera<span class="token punctuation">,</span> text_gener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>After creating these indexes see how quickly these question can be answered now and compare the times of before and after!</p>
+<p>Appendix</p>
+<p>I.</p>
+<p>In order to create the tables, the shapefile data should be downloaded from <a href="https://www.opendataphilly.org/">https://www.opendataphilly.org/</a>.  This should be specifically from the public safety page which can be found here: <a href="http://opendataphilly.org/group/public-safety-group">opendataphilly.org/group/public-safety-group</a> . Once on this page, download the police districts shapefile which can be downloaded directly here: <a href="http://data.phl.opendata.arcgis.com/datasets/62ec63afb8824a15953399b1fa819df2_0.zip" title="http://data.phl.opendata.arcgis.com/datasets/62ec63afb8824a15953399b1fa819df2_0.zip">http://data.phl.opendata.arcgis.com/datasets/62ec63afb8824a15953399b1fa819df2_0.zip</a>. Make sure to download the police stations shapefile data as well at the following link:<br>
+<a href="http://data.phl.opendata.arcgis.com/datasets/7e522339d7c24e8ea5f2c7780291c315_0.zip" title="http://data.phl.opendata.arcgis.com/datasets/7e522339d7c24e8ea5f2c7780291c315_0.zip">http://data.phl.opendata.arcgis.com/datasets/7e522339d7c24e8ea5f2c7780291c315_0.zip</a>. The crime shapefile data can be directly found  here: <a href="https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+incidents_part1_part2&amp;filename=incidents_part1_part2&amp;format=shp&amp;skipfields=cartodb_id" title="https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+incidents_part1_part2&amp;filename=incidents_part1_part2&amp;format=shp&amp;skipfields=cartodb_id">https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+incidents_part1_part2&amp;filename=incidents_part1_part2&amp;format=shp&amp;skipfields=cartodb_id</a>. From this link you should be able to download the incident_part1_part2 shapefile, but because it is a very large file it may take several minutes to download from the browser. This can then be moved to loaded onto QGIS and examined through the browser panel. You are then able to go through folders to whichever folder you have saved your data to. In this tutorial the data was saved in <strong>C:\ &gt; Users &gt; tuf91019 &gt; Spatial Database Design</strong>. These files can then be clicked on and off depending on if the user would like to view them or not.</p>
+<p>II.</p>
+<p>In order to get this information into new tables that are created, this information is pulled from the previous tables that are downloaded and brought over from QGIS. This can be done through the following code:</p>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token comment">--create extension</span>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th>ASCII</th>
-<th>HTML</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Single backticks</td>
-<td><code>'Isn't this fun?'</code></td>
-<td>‘Isn’t this fun?’</td>
-</tr>
-<tr>
-<td>Quotes</td>
-<td><code>"Isn't this fun?"</code></td>
-<td>“Isn’t this fun?”</td>
-</tr>
-<tr>
-<td>Dashes</td>
-<td><code>-- is en-dash, --- is em-dash</code></td>
-<td>– is en-dash, — is em-dash</td>
-</tr>
-</tbody>
-</table><h2 id="katex">KaTeX</h2>
-<p>You can render LaTeX mathematical expressions using <a href="https://khan.github.io/KaTeX/">KaTeX</a>:</p>
-<p>The <em>Gamma function</em> satisfying <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo><mspace width="1em"></mspace><mi mathvariant="normal">∀</mi><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">N</mi></mrow><annotation encoding="application/x-tex">\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">!</span><span class="mspace" style="margin-right: 1em;"></span><span class="mord">∀</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68889em; vertical-align: 0em;"></span><span class="mord mathbb">N</span></span></span></span></span> is via the Euler integral</p>
-<p><span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup><msup><mi>t</mi><mrow><mi>z</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><mi>t</mi></mrow></msup><mi>d</mi><mi>t</mi> <mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right: 0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.32624em; vertical-align: -0.91195em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right: 0.44445em; position: relative; top: -0.001125em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.41429em;"><span class="" style="top: -1.78805em; margin-left: -0.44445em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span class="" style="top: -3.8129em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">∞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.91195em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.04398em;">z</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.843556em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight">t</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">d</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">.</span></span></span></span></span></span></p>
-<blockquote>
-<p>You can find more information about <strong>LaTeX</strong> mathematical expressions <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">here</a>.</p>
-</blockquote>
-<h2 id="uml-diagrams">UML diagrams</h2>
-<p>You can render UML diagrams using <a href="https://mermaidjs.github.io/">Mermaid</a>. For example, this will produce a sequence diagram:</p>
-<div class="mermaid"><svg xmlns="http://www.w3.org/2000/svg" id="mermaid-svg-jdD79BEfxaSJmRLg" height="100%" width="100%" style="max-width:750px;" viewBox="-50 -10 750 457.0625"><g></g><g><line id="actor18" x1="75" y1="5" x2="75" y2="446.0625" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="75" dy="0">Alice</tspan></text></g><g><line id="actor19" x1="275" y1="5" x2="275" y2="446.0625" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="200" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="275" dy="0">Bob</tspan></text></g><g><line id="actor20" x1="475" y1="5" x2="475" y2="446.0625" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="400" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="475" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="475" dy="0">John</tspan></text></g><defs><marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker></defs><defs><marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="16" refY="4"><path fill="black" stroke="#000000" stroke-width="1px" d="M 9,2 V 6 L16,4 Z" style="stroke-dasharray: 0, 0;"></path><path fill="none" stroke="#000000" stroke-width="1px" d="M 0,1 L 6,7 M 6,1 L 0,7" style="stroke-dasharray: 0, 0;"></path></marker></defs><g><text x="175" y="93" class="messageText" style="text-anchor: middle;">Hello Bob, how are you?</text><line x1="75" y1="100" x2="275" y2="100" class="messageLine0" stroke-width="2" stroke="black" marker-end="url(#arrowhead)" style="fill: none;"></line></g><g><text x="375" y="128" class="messageText" style="text-anchor: middle;">How about you John?</text><line x1="275" y1="135" x2="475" y2="135" class="messageLine1" stroke-width="2" stroke="black" marker-end="url(#arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"></line></g><g><text x="175" y="163" class="messageText" style="text-anchor: middle;">I am good thanks!</text><line x1="275" y1="170" x2="75" y2="170" class="messageLine1" stroke-width="2" stroke="black" marker-end="url(#crosshead)" style="stroke-dasharray: 3, 3; fill: none;"></line></g><g><text x="375" y="198" class="messageText" style="text-anchor: middle;">I am good thanks!</text><line x1="275" y1="205" x2="475" y2="205" class="messageLine0" stroke-width="2" stroke="black" marker-end="url(#crosshead)" style="fill: none;"></line></g><g><rect x="500" y="215" fill="#EDF2AE" stroke="#666" width="150" height="76.0625" rx="0" ry="0" class="note"></rect><text x="496" y="239" fill="black" class="noteText"><tspan x="516" fill="black">Bob thinks a long</tspan></text><text x="496" y="253.015625" fill="black" class="noteText"><tspan x="516" fill="black">long time, so long</tspan></text><text x="496" y="267.03125" fill="black" class="noteText"><tspan x="516" fill="black">that the text does</tspan></text><text x="496" y="281.046875" fill="black" class="noteText"><tspan x="516" fill="black">not fit on a row.</tspan></text></g><g><text x="175" y="319.0625" class="messageText" style="text-anchor: middle;">Checking with John...</text><line x1="275" y1="326.0625" x2="75" y2="326.0625" class="messageLine1" stroke-width="2" stroke="black" style="stroke-dasharray: 3, 3; fill: none;"></line></g><g><text x="275" y="354.0625" class="messageText" style="text-anchor: middle;">Yes... John, how are you?</text><line x1="75" y1="361.0625" x2="475" y2="361.0625" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;"></line></g><g><rect x="0" y="381.0625" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="413.5625" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="75" dy="0">Alice</tspan></text></g><g><rect x="200" y="381.0625" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="413.5625" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="275" dy="0">Bob</tspan></text></g><g><rect x="400" y="381.0625" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="475" y="413.5625" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="475" dy="0">John</tspan></text></g></svg></div>
-<p>And this will produce a flow chart:</p>
-<div class="mermaid"><svg xmlns="http://www.w3.org/2000/svg" id="mermaid-svg-PD4mOchswOLBbDOw" width="100%" style="max-width: 654.4515686035156px;" viewBox="0 0 654.4515686035156 204.828125"><g transform="translate(-12, -12)"><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath" style="opacity: 1;"><path class="path" d="M163.82949225139026,90.12109375L236.4765625,59.9140625L337.8828125,59.9140625" marker-end="url(#arrowhead87)" style="fill:none"></path><defs><marker id="arrowhead87" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M163.82949225139026,149.12109375L236.4765625,179.328125L307.1875,179.328125" marker-end="url(#arrowhead88)" style="fill:none"></path><defs><marker id="arrowhead88" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M417.7109375,59.9140625L473.40625,59.9140625L527.9108276394707,91.11651305877153" marker-end="url(#arrowhead89)" style="fill:none"></path><defs><marker id="arrowhead89" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M448.40625,179.328125L473.40625,179.328125L527.9108315307392,149.12567222898127" marker-end="url(#arrowhead90)" style="fill:none"></path><defs><marker id="arrowhead90" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(236.4765625,59.9140625)" style="opacity: 1;"><g transform="translate(-45.7109375,-19.5)" class="label"><foreignObject width="91.4296875" height="39"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">Link text</span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node" id="A" transform="translate(92.8828125,119.62109375)" style="opacity: 1;"><rect rx="0" ry="0" x="-72.8828125" y="-29.5" width="145.765625" height="59"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-62.8828125,-19.5)"><foreignObject width="125.765625" height="39"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Square Rect</div></foreignObject></g></g></g><g class="node" id="B" transform="translate(377.796875,59.9140625)" style="opacity: 1;"><circle x="-39.9140625" y="-29.5" r="39.9140625"></circle><g class="label" transform="translate(0,0)"><g transform="translate(-29.9140625,-19.5)"><foreignObject width="59.8359375" height="39"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Circle</div></foreignObject></g></g></g><g class="node" id="C" transform="translate(377.796875,179.328125)" style="opacity: 1;"><rect rx="5" ry="5" x="-70.609375" y="-29.5" width="141.21875" height="59"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-60.609375,-19.5)"><foreignObject width="121.21875" height="39"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Round Rect</div></foreignObject></g></g></g><g class="node" id="D" transform="translate(578.4289093017578,119.62109375)" style="opacity: 1;"><polygon points="80.02265625,0 160.0453125,-80.02265625 80.02265625,-160.0453125 0,-80.02265625" rx="5" ry="5" transform="translate(-80.02265625,80.02265625)"></polygon><g class="label" transform="translate(0,0)"><g transform="translate(-49.4140625,-19.5)"><foreignObject width="98.8359375" height="39"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Rhombus</div></foreignObject></g></g></g></g></g></g></svg></div>
+<span class="token keyword">create</span> extension postgis<span class="token punctuation">;</span>
+
+<span class="token comment">--create the database</span>
+
+<span class="token keyword">drop</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> philadelphia<span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">database</span> philadelphia<span class="token punctuation">;</span>
+
+<span class="token comment">--create the philadelphia police district boundaries</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> philadelphia_police_boundaries <span class="token keyword">CASCADE</span><span class="token punctuation">;</span> <span class="token comment">--formerly districts</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> philadelphia_police_boundaries <span class="token punctuation">(</span>
+	police_dist_id <span class="token keyword">int</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+	district <span class="token keyword">int</span><span class="token punctuation">,</span>
+	location <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	geom <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+	phone <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	div_code <span class="token keyword">varchar</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> philadelphia_police_boundaries
+<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> district<span class="token punctuation">,</span> location<span class="token punctuation">,</span> phone<span class="token punctuation">,</span> div_code<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+id :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+geom :: <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+district_ :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+location :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+phone :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+div_code :: <span class="token keyword">varchar</span>
+<span class="token keyword">from</span>
+phillypolice_boundaries_district<span class="token punctuation">;</span>
+
+<span class="token comment">--create the police station tables</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> police_station <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> police_station <span class="token punctuation">(</span>
+	district_neighborhoods <span class="token keyword">int</span><span class="token punctuation">,</span>
+	police_dist_id <span class="token keyword">int</span> <span class="token keyword">references</span> philadelphia_police_districts<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	station_id <span class="token keyword">integer</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+	geom <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+	location <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	telephone <span class="token keyword">varchar</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> police_station
+<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> location<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+<span class="token string">'77'</span><span class="token punctuation">,</span> <span class="token string">'MULTIPOINT ((-75.13396 40.00764))'</span><span class="token punctuation">,</span> <span class="token string">'25'</span><span class="token punctuation">,</span> <span class="token string">'Departures Rd'</span><span class="token punctuation">,</span> <span class="token string">'937-6918'</span><span class="token punctuation">,</span> <span class="token string">'15'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> police_station
+<span class="token punctuation">(</span>district_neighborhoods<span class="token punctuation">,</span> geom<span class="token punctuation">,</span> station_id<span class="token punctuation">,</span> location<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+district_n :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+geom :: <span class="token keyword">geometry</span><span class="token punctuation">,</span>
+objectid :: <span class="token keyword">int</span><span class="token punctuation">,</span>
+location :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+telephone_ :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> police_dist_id
+<span class="token keyword">from</span> philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">where</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>district_n<span class="token punctuation">)</span>
+<span class="token keyword">from</span>
+police_tp <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">--create the crime_incident tables and inserts</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> crime_incident <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> crime_incident <span class="token punctuation">(</span>
+	dc_key <span class="token keyword">varchar</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+	police_dist_id <span class="token keyword">int</span> <span class="token keyword">references</span> philadelphia_police_boundaries<span class="token punctuation">(</span>police_dist_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	crime_id <span class="token keyword">integer</span><span class="token punctuation">,</span>
+	crime_dist <span class="token keyword">integer</span><span class="token punctuation">,</span>
+	psa <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	crime_location <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	dispatch_date <span class="token keyword">date</span><span class="token punctuation">,</span>
+	dispatch_time <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	geom <span class="token keyword">geometry</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> crime_incident
+<span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> police_dist_id<span class="token punctuation">,</span> crime_id<span class="token punctuation">,</span> crime_dist<span class="token punctuation">,</span> psa<span class="token punctuation">,</span> crime_location<span class="token punctuation">,</span> dispatch_date<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> geom<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> police_dist_id
+<span class="token keyword">from</span> philadelphia_police_boundaries <span class="token keyword">as</span> <span class="token number">c</span>
+<span class="token keyword">where</span> <span class="token number">c</span><span class="token punctuation">.</span>district <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span>dc_dist :: <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+id :: <span class="token keyword">integer</span><span class="token punctuation">,</span>
+dc_dist :: <span class="token keyword">integer</span><span class="token punctuation">,</span>
+psa :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+location_b :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+dispatch_d :: <span class="token keyword">date</span><span class="token punctuation">,</span>
+dispatch_t :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+geom :: <span class="token keyword">geometry</span>
+<span class="token keyword">from</span>
+incidents_part1_part2 <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
+
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'16'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'92'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'3'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'4'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">UPDATE</span> crime_incident
+<span class="token keyword">SET</span> crime_dist <span class="token operator">=</span> <span class="token string">'22'</span>
+<span class="token keyword">WHERE</span> crime_dist <span class="token operator">=</span> <span class="token string">'23'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> crime_district <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> crime_district <span class="token punctuation">(</span>
+	dc_key <span class="token keyword">varchar</span> <span class="token keyword">references</span> crime_incident<span class="token punctuation">(</span>dc_key<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	crime_district_id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+	crime_district <span class="token keyword">int</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> crime_district
+<span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> crime_district<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">bigint</span><span class="token punctuation">,</span>
+dc_dist :: <span class="token keyword">int</span>
+<span class="token keyword">from</span>
+incidents_part1_part2 <span class="token keyword">as</span> <span class="token number">d</span><span class="token punctuation">;</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> ucr_text_genera <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> ucr_text_genera <span class="token punctuation">(</span>
+	dc_key <span class="token keyword">varchar</span> <span class="token keyword">references</span> crime_incident<span class="token punctuation">(</span>dc_key<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    ucr_id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+	ucr_genera <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+	text_gener <span class="token keyword">varchar</span>
+	<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> ucr_text_genera
+<span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> ucr_genera<span class="token punctuation">,</span> text_gener<span class="token punctuation">)</span>
+<span class="token keyword">select</span>
+dc_key :: <span class="token keyword">bigint</span><span class="token punctuation">,</span>
+ucr_genera :: <span class="token keyword">varchar</span><span class="token punctuation">,</span>
+text_gener :: <span class="token keyword">varchar</span>
+<span class="token keyword">from</span>
+incidents_part1_part2<span class="token punctuation">;</span>
+</code></pre>
+<p>III.<br>
+After creating the ETL, creating an index for the crime_incidents and the ucr_text_genera tables is the next step. This helps speed up queries through especially in the Select and Where.</p>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> crime_philadelphia
+<span class="token keyword">ON</span> crime_incident <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> crime_id<span class="token punctuation">,</span> crime_location<span class="token punctuation">,</span> dispatch_date<span class="token punctuation">,</span> dispatch_time<span class="token punctuation">,</span> crime_location<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> crime_types
+<span class="token keyword">ON</span> ucr_text_genera <span class="token punctuation">(</span>dc_key<span class="token punctuation">,</span> ucr_genera<span class="token punctuation">,</span> text_gener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>IV.<br>
+The following information contains column information for each of the tables that have been added to the database.</p>
+<p>The <strong>philadelphia_police_boundaries</strong> contains the following columns and information:</p>
+<ul>
+<li><strong>police_dist_id</strong>- this contains the primary key of the table</li>
+<li><strong>district</strong>- this is the district of the boundary</li>
+<li>**	location**- the location of the the boundaries</li>
+<li><strong>geom</strong>- the geometry of each police boundary</li>
+<li>**	phone **- the phone number of the police boundary</li>
+<li>**	div_code**-division code for the district<br>
+);</li>
+</ul>
+<p>This information describes the <strong>police_station</strong> table’s columns:</p>
+<ul>
+<li><strong>district_neighborhoods</strong>- gives the police district neighborhoods</li>
+<li><strong>police_dist_id</strong>- this references the primary key of the philadelphia_police_boundaries</li>
+<li><strong>station_id</strong>- this is the primary key of the police_station table and gives a unique number for each station</li>
+<li><strong>geom</strong>- gives the geometry of each police_station</li>
+<li><strong>location</strong>- has the location of each of the police_stations</li>
+<li><strong>telephone</strong>- lists the phone number of each station</li>
+</ul>
+<p>The <strong>crime_incidents</strong> table contains the following columns and information:</p>
+<ul>
+<li><strong>dc_key</strong>- a primary key for each crime that has been committed</li>
+<li><strong>police_dist_id</strong>- this references the primary key of the philadelphia_police_boundaries</li>
+<li><strong>crime_id</strong>- a code for each crime that is committed</li>
+<li><strong>crime_dist</strong>- the district that each crime was committed in</li>
+<li><strong>psa</strong>- police service area boundary</li>
+<li><strong>crime_location</strong>- the approximate location of a crime</li>
+<li><strong>dispatch_date</strong>- the date that a dispatch was sent out to a crime</li>
+<li><strong>dispatch_time</strong>- the approximate time a dispatch was sent out to the location of a crime</li>
+<li><strong>geom</strong>- the geometry of each crime</li>
+</ul>
+<p>The <strong>crime_districts</strong> table contains the following information:</p>
+<ul>
+<li><strong>dc_key</strong>- this references the primary key of the crime_incident table</li>
+<li><strong>crime_district_id</strong>- this gives the table its own primary key and gives each district a unique number</li>
+<li><strong>crime_district</strong>- this references the districts that had been used before the data set was updated</li>
+</ul>
+<p>The table <strong>ucr_text_genera</strong> contains the following columns and information:</p>
+<ul>
+<li><strong>dc_key</strong>- this references the primary key of the crime_incident table</li>
+<li><strong>ucr_id</strong>- this is the primary key of the table</li>
+<li><strong>ucr_genera</strong>- the rounded crime code for a particular crime that is committed</li>
+<li><strong>text_gener</strong>- the text of the crime that was committed</li>
+</ul>
+<h2 id="end-of-tutorial">End of Tutorial</h2>
 </div>
 </body>
 
